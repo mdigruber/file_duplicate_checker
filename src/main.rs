@@ -20,10 +20,11 @@ fn main() -> io::Result<()> {
     // Vecs are dynamic arrays in Rust 
     let mut arr : Vec<String> = vec![];
     
-    for file in path {
+    for filepath in path {
         
+
         // gets File
-        let mut file = fs::File::open(file.unwrap().path())?;
+        let mut file = fs::File::open(&filepath.unwrap().path())?;
         
         //Initializes MD5 Hash
         let mut hasher = Md5::new();
@@ -37,7 +38,7 @@ fn main() -> io::Result<()> {
         
         // Check if file is already in Vector
         if arr.contains(&str_hash) {
-            println!("{} duplicated", &str_hash)
+            println!("{:?} duplicated", file)
         } else {
             arr.push(str_hash);
         }
