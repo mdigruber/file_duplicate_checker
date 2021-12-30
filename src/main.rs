@@ -15,13 +15,13 @@ fn main() -> io::Result<()> {
    
     // Ready Directory where duplicates should be checked
     let path = fs::read_dir(cli_path).unwrap();
-
+    let filecount = fs::read_dir(cli_path).unwrap().count();
 
     // Vecs are dynamic arrays in Rust 
     let mut arr : Vec<String> = vec![];
     
+    let mut counter = 1;
     for filepath in path {
-        
 
         // gets File
         let mut file = fs::File::open(&filepath.unwrap().path())?;
@@ -32,7 +32,8 @@ fn main() -> io::Result<()> {
         // Hashes file
         let _n = io::copy(&mut file, &mut hasher)?;
         let hash = hasher.finalize();
-  
+
+        println!("Analyzing Image {}/{}", counter, filecount);
         // MD5 Hash from bytes to Hex String
         let str_hash = format!("{:x}", hash);
         
@@ -42,6 +43,7 @@ fn main() -> io::Result<()> {
         } else {
             arr.push(str_hash);
         }
+        counter += 1;
 
     }
     
