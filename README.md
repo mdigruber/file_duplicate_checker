@@ -18,7 +18,7 @@ To use it, you need Rust and Cargo installed on your System.
 1. Refactor
 2. Printouts should be better
 3. Option to delete files
-4. Make it faster
+4. Improve Performance
 
 
 
